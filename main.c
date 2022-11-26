@@ -40,21 +40,28 @@ extern void quit_handler(unsigned int*);
 
 extern void get_option(unsigned int*);
 
-/*array of pointer to function(unsigned int*) returning void*/
+/*array of 3 pointer to function(unsigned int*) returning void*/
 void (*call_handler[3])(unsigned int*) = { add_handler, cancel_handler, quit_handler };
 
 int main(void)
 {
-	/*선택한 옵션 번호*/
-	unsigned int opt = 0;
+	/*선택한 옵션*/
+	unsigned int opt;
 	/*지불할 총액*/
 	unsigned int sum = 0;
 
 	while (1)
 	{
+		/*전체 음식(메뉴판)을 출력해주는 함수 호출*/
 		print_all(&sum);
+
+		/*옵션을 출력해주는 함수 호출*/
 		print_option();
+
+		/*옵션을 입력 받는 함수 호출*/
 		get_option(&opt);
+
+		/*선택한 옵션을 인덱스로 핸들러 호출*/
 		call_handler[opt - 1](&sum);
 	}
 

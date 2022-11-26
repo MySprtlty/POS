@@ -7,6 +7,7 @@
 extern food _all[NUM_OF_FOODS];
 extern selected_food _selected[NUM_OF_FOODS];
 
+/*카테고리 이름을 저장하는 배열*/
 static char* categories[NUM_OF_CATEGORIES] =
 {
 	"세트메뉴",
@@ -18,7 +19,7 @@ static char* categories[NUM_OF_CATEGORIES] =
 /*옵션들을 출력하는 함수*/
 void print_option(void)
 {
-	printf("1. 추가\t2. 취소\t3. 입력종료\n");
+	printf("1. 추가 \t2. 취소 \t3. 입력종료\n");
 	return;
 }
 
@@ -27,6 +28,8 @@ void print_all(const unsigned int* sum)
 {
 	int i = 0;
 	system("cls");
+
+	/*_all 배열을 순환하며 요소를 출력한다.*/
 	for (i; i < NUM_OF_FOODS; i++)
 	{
 		/*특정 카테고리의 첫 음식이라면*/

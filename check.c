@@ -1,3 +1,8 @@
+/*
+* check.c
+* 변환이나 탐색을 맡는 함수가 정의되어 있다.
+*/
+
 #include "food.h"
 #include <stdio.h>
 #include <ctype.h>
@@ -7,13 +12,13 @@ extern food _all[NUM_OF_FOODS];
 extern selected_food _selected[NUM_OF_FOODS];
 extern unsigned int tos;
 
-/*prototype function declaration*/
+/*prototype declaration*/
 unsigned int ctoi(const char);
 enum bool is_digit_string(const char*);
 enum bool is_exist(const unsigned int);
 int search_index(const unsigned int seq, enum mode m);
 
-/*convert char to int*/
+/*convert char to int*/ 
 unsigned int ctoi(const char c)
 {
 	static const char* const table = "0123456789";
@@ -76,7 +81,7 @@ int search_index(const unsigned int seq, enum mode m)
 				return i; /*return index*/
 			}
 		}
-		fprintf(stderr, "Error: can't search index (mode: ALL)\n");
+		fprintf(stderr, "Error: Can't search index (mode:ALL)\n");
 	}
 	else if (m == SELECTED) /* _selected에서 탐색*/
 	{
@@ -87,11 +92,11 @@ int search_index(const unsigned int seq, enum mode m)
 				return i;
 			}
 		}
-		fprintf(stderr, "Error: can't search index (mode: SELECTED)\n");
+		fprintf(stderr, "Error: Can't search index (mode:SELECTED)\n");
 	}
 	else /*유효하지 않은 모드*/
 	{
-		fprintf(stderr, "Error: invalid mode\n");
+		fprintf(stderr, "Error: Invalid mode\n");
 	}
 	return -1;
 }

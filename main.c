@@ -1,3 +1,6 @@
+/*
+* main.c
+*/
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
@@ -26,17 +29,20 @@ food _all[NUM_OF_FOODS] =
 /*현재 선택된 음식을 저장하는 배열*/
 selected_food _selected[NUM_OF_FOODS];
 
-/*top of _selected*/
-unsigned int tos; /*비대칭 경계*/
+/*
+* top of _selected
+* 비대칭 경계
+*/
+unsigned int tos;
 
-/*function prototype declaration*/
+/*prototype declaration*/
 extern void print_all(const unsigned int*);
 extern void print_selected(const unsigned int*);
 extern void print_option(void);
 
 extern void add_handler(unsigned int*);
 extern void cancel_handler(unsigned int*);
-extern void quit_handler(unsigned int*);
+extern void quit_handler(const unsigned int*);
 
 extern void get_option(unsigned int*);
 
@@ -55,13 +61,13 @@ int main(void)
 		/*전체 음식(메뉴판)을 출력해주는 함수 호출*/
 		print_all(&sum);
 
-		/*옵션을 출력해주는 함수 호출*/
+		/*선택지를 출력해주는 함수 호출*/
 		print_option();
 
 		/*옵션을 입력 받는 함수 호출*/
 		get_option(&opt);
 
-		/*선택한 옵션을 인덱스로 핸들러 호출*/
+		/*옵션값을 인덱스로 각각의 handler 호출*/
 		call_handler[opt - 1](&sum);
 	}
 

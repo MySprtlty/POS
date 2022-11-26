@@ -1,24 +1,36 @@
+/*
+* handler.c
+* 옵션들을 처리하는 Handler 정의되어 있다.
+*/
 #define _CRT_SECURE_NO_WARNINGS
 
-/*입력 버퍼를 비운다.*/
+/*입력 버퍼를 비우는 매크로*/
 #define FFLUSH_STDIN while(getchar() != '\n'){} 
-#define INPUT_BUFFER_SIZE 50
+
+/*입력 버퍼 사이즈*/
+#define INPUT_BUFFER_SIZE 100
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include "food.h"
+#include <Windows.h>
 
 extern food _all[NUM_OF_FOODS];
 extern selected_food _selected[NUM_OF_FOODS];
 extern unsigned int tos;
 
-/*prototype function declaration*/
+/*prototype declaration*/
 extern void print_selected(const unsigned int*);
 extern unsigned int ctoi(const char);
 extern enum bool is_digit_string(const char*);
 extern enum bool is_exist(const unsigned int);
 extern int search_index(const unsigned int seq, enum mode m);
+
+void get_option(unsigned int*);
+void add_handler(unsigned int*);
+void cancel_handler(unsigned int*);
+void quit_handler(const unsigned int*);
 
 /*사용자에게 옵션을 입력받는 함수*/
 void get_option(unsigned int* opt)
@@ -157,14 +169,25 @@ void cancel_handler(unsigned int* sum)
 }
 
 /*종료 옵션을 처리하는 함수*/
-void quit_handler(unsigned int* sum) // compatible type: const 사용여부 확인
+void quit_handler(const unsigned int* sum)
 {
 	unsigned int pay = 0;
+	char tmp[INPUT_BUFFER_SIZE];
+
+	system("cls");
 
 	printf("고객이 지불할 총액은 %u원 입니다.\n", *sum);
-	printf("고객으로부터 받은 금액을 입력 후 Enter: ");
 
-	scanf("%u", &pay);
+	while (1) 
+	{
+		printf("고객으로부터 받은 금액을 입력 후 Enter: ");
+		scanf("%s", &tmp);
+
+		/*숫자이고, 음수가 아닐 경우에만 허용*/
+		if (is_digit_string(tmp) && ((pay = atoi(tmp)) >= 0))
+			break;
+		FFLUSH_STDIN
+	}
 
 	system("cls");
 
@@ -172,5 +195,7 @@ void quit_handler(unsigned int* sum) // compatible type: const 사용여부 확인
 	print_selected(&tos);
 	printf("금액: %u\n", *sum);
 	printf("잔돈: %d\n", pay - (*sum));
+	
+	Sleep(1000);
 	exit(0);
 }

@@ -1,11 +1,21 @@
+/*
+* print.c
+* 출력과 관련된 함수가 정의되어 있다.
+*/
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "food.h"
 
+/*prototype declaration*/
 extern food _all[NUM_OF_FOODS];
 extern selected_food _selected[NUM_OF_FOODS];
+
+void print_option(void);
+void print_all(const unsigned int*);
+void print_selected(const unsigned int*);
 
 /*카테고리 이름을 저장하는 배열*/
 static char* categories[NUM_OF_CATEGORIES] =
@@ -16,10 +26,11 @@ static char* categories[NUM_OF_CATEGORIES] =
 	"음료메뉴"
 };
 
-/*옵션들을 출력하는 함수*/
+/*선택지를 출력하는 함수*/
 void print_option(void)
 {
 	printf("1. 추가 \t2. 취소 \t3. 입력종료\n");
+
 	return;
 }
 

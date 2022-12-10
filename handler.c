@@ -158,7 +158,7 @@ void cancel_handler(unsigned int* sum)
 
 	FFLUSH_STDIN
 
-	/**/
+	/*음식의 수량을 0으로 갱신한다.*/
 	if (is_exist(seq))
 	{
 		selected_food* target = &(_selected[search_index(seq, SELECTED)]);
@@ -168,7 +168,7 @@ void cancel_handler(unsigned int* sum)
 	return;
 }
 
-/*종료 옵션을 처리하는 함수*/
+/*종료를 처리하는 함수*/
 void quit_handler(const unsigned int* sum)
 {
 	unsigned int pay = 0;
